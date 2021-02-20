@@ -6,12 +6,13 @@ function App () {
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-        fetch('/api/hello')
+        fetch('/rest/hello')
             .then(response => response.text())
             .then(message => {
                 setMessage(message);
             });
-    },[])
+    },[]);
+
     return (
         <div className="App">
         <header className="App-header">
@@ -19,7 +20,7 @@ function App () {
         <h1 className="App-title">{message}</h1>
         </header>
         <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
+        To geta started, edit <code>src/App.js</code> and save to reload.
     </p>
     </div>
 )

@@ -5,6 +5,13 @@ Base REACT-SPRING BOOT application
 This project was downloaded from: `https://github.com/kantega/react-and-spring` 
 and was updated by author relies on his own requirements for fast building and starting web application
 
+## Project specification:
+Chat web application with configured swagger support, built by TDD technology
+
+## Starting React application for DEV:
+To start react application you have to run `npm install`  in terminal in frontend directory and after all dependencies will be installed
+you have to run `react-scripts start`  in terminal
+
 ## Packaging the React app with Spring Boot
 We'd like to be able to publish *one* jar file to production, and that jar file should
 contain both the backend and the frontend. Spring Boot applications can serve static content if you put
