@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface MessageService {
     public List<Message> getMessages();
+
+    public boolean addMessage(Message message);
 }

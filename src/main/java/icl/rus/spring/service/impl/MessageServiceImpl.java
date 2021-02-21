@@ -16,4 +16,10 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> getMessages() {
         return repository.findAll();
     }
+
+    public boolean addMessage(Message message) {
+        repository.save(message);
+
+        return true;
+    }
 }
