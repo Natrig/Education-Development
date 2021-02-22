@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from './assets/logo.svg';
 import './App.css';
+import Chat from './components/Chat';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -20,9 +21,9 @@ function App() {
         <img src={logo} className="App-logo" alt="logo"/>
         <h1 className="App-title">{message}</h1>
       </header>
-      <p className="App-intro">
-        To geta started, edit <code>src/App.js</code> and save to reload.
-      </p>
+      <div className="App-intro">
+        <Chat width={'600px'}/>
+      </div>
     </div>
   );
 }

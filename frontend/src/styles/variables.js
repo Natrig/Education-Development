@@ -3,7 +3,7 @@ export const vars = {
   "body_background": "#fff",
   "layout_body_background": "#E5E5E5",
   "layout_header_background": "#001529",
-  "component_background": "#fff",
+  "component_background": "#f2f0ff",
   "font_size_base": "14px",
   "text_color": "rgba(0, 0, 0, 0.65)",
   "text_color_secondary": "rgba(0, 0, 0, 0.45)",
