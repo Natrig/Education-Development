@@ -1,23 +1,16 @@
 export const vars = {
   "menu_bg": "#F8F8F8",
-  "body_background": "#fff",
-  "layout_body_background": "#E5E5E5",
-  "layout_header_background": "#001529",
-  "component_background": "#f2f0ff",
+  "component_background": "#caecff",
+  "message_border": "#1ca7c7",
+  "main_gradient": "linear-gradient(to left, #775fffa8, #e83286)",
   "font_size_base": "14px",
   "text_color": "rgba(0, 0, 0, 0.65)",
   "text_color_secondary": "rgba(0, 0, 0, 0.45)",
   "box_shadow_base": "0 2px 8px rgba(0, 0, 0, 0.15)",
-  "input_color": "rgba(0, 0, 0, 0.65)",
-  "input_icon_color": "rgba(0, 0, 0, 0.65)",
   "primary_color": "#1890ff",
   "link_color": "#1890ff",
   "success_color": "#00B16A",
   "warning_color": "#faad14",
   "error_color": "#F03434",
-  "heading_color": "rgba(0, 0, 0, 0.85)",
-  "disabled_color": "rgba(0, 0, 0, 0.25)",
-  "border_radius_base": "4px",
-  "border_color_base": "#d9d9d9",
-  "secondary_background_color": "#fbfbfb"
+  "secondary_background_color": "#222"
 }

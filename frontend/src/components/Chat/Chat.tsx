@@ -34,6 +34,10 @@ export default class Chat extends Component<IProps, IState> {
     });
   };
 
+  sendMessage = (message: MessageDTO): boolean => {
+    return this.webSocketService.sendMessage(message);
+  };
+
   componentDidMount(): void {
     this.webSocketService.openWebSocket(this.updateMessages);
   }
@@ -46,7 +50,7 @@ export default class Chat extends Component<IProps, IState> {
     return (
       <div className={classes.container} style={{ width: this.props.width }}>
         <MessageContainer messages={this.state.messages}/>
-        <MessageSender/>
+        <MessageSender onSend={this.sendMessage}/>
       </div>
     );
   }

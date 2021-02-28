@@ -1,5 +1,7 @@
 import React, { Component, ReactNode } from 'react';
 import { MessageDTO } from '../../../models/MessageDTO';
+import classes from './MessageContainer.module.less';
+import moment from 'moment';
 
 type IProps = {
   messages: MessageDTO[] | null;
@@ -8,7 +10,10 @@ type IProps = {
 export default class MessageContainer extends Component<IProps, unknown> {
   public renderMessage = (messages: MessageDTO[]) => {
     return messages.map(msg =>
-      <div key={msg.id}>{msg.id} () : {msg.message}</div>,
+      <div key={msg.id} className={classes.message}>
+        <div className={classes.message_content}>anonymous: {msg.message}</div>
+        <div className={classes.message_date}>{moment(msg.createDate).format('DD.MM.yyyy hh:mm:ss')}</div>
+      </div>,
     );
   };
 
@@ -19,6 +24,10 @@ export default class MessageContainer extends Component<IProps, unknown> {
       return <>No messages yet</>;
     }
 
-    return this.renderMessage(messages);
+    return (
+      <div className={classes.container}>
+        {this.renderMessage(messages)}
+      </div>
+    );
   }
 }

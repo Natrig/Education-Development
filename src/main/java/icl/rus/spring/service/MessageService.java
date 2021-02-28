@@ -7,5 +7,5 @@ import java.util.List;
 public interface MessageService {
     public List<MessageDTO> getMessages();
 
-    public boolean addMessage(MessageDTO message);
+    public MessageDTO addMessage(MessageDTO message);
 }

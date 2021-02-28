@@ -19,8 +19,10 @@ export default class WebSocketService {
     this.websocket?.close();
   }
 
-  public sendMessage(message: MessageDTO) {
-    message.message = "test";
-    this.websocket?.send(JSON.stringify(message));
+  public sendMessage(message: MessageDTO): boolean {
+    const messageJSON = JSON.stringify(message);
+    this.websocket?.send(messageJSON);
+
+    return !!this.websocket;
   }
 }

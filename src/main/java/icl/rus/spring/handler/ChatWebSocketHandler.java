@@ -1,5 +1,6 @@
 package icl.rus.spring.handler;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import icl.rus.spring.model.dto.MessageDTO;
 import icl.rus.spring.service.MessageService;
@@ -19,20 +20,26 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws IOException {
         webSocketSessions.add(session);
 
         for (MessageDTO message : messageService.getMessages()) {
-            session.sendMessage(new TextMessage(new ObjectMapper().writeValueAsString(message)));
+            session.sendMessage(toSocketFormat(message));
         }
     }
 
     @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) {
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
+        MessageDTO inMessage = objectMapper.readValue(message.getPayload(), MessageDTO.class);
+        MessageDTO outMessage = messageService.addMessage(inMessage);
+
         webSocketSessions.forEach(clientSession -> {
             try {
-                clientSession.sendMessage(message);
+                clientSession.sendMessage(toSocketFormat(outMessage));
             } catch (IOException e) {
                 System.out.println("Cannot send message to session: " + session.getId());
                 e.printStackTrace();
@@ -43,5 +50,9 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
         webSocketSessions.remove(session);
+    }
+
+    private TextMessage toSocketFormat(MessageDTO messageDTO) throws JsonProcessingException {
+        return new TextMessage(objectMapper.writeValueAsString(messageDTO));
     }
 }

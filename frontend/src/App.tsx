@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import logo from './assets/logo.svg';
-import './App.css';
 import Chat from './components/Chat';
+
+import classes from './App.module.less';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -16,12 +17,12 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo"/>
-        <h1 className="App-title">{message}</h1>
+    <div className={classes.app}>
+      <header className={classes.header}>
+        <img src={logo} className={classes.logo} alt="logo"/>
+        <h1 className={classes.title}>{message}</h1>
       </header>
-      <div className="App-intro">
+      <div className={classes.intro}>
         <Chat width={'600px'}/>
       </div>
     </div>

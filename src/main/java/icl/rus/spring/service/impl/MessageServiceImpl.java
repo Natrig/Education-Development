@@ -2,6 +2,7 @@ package icl.rus.spring.service.impl;
 
 import icl.rus.spring.converter.MessageConverter;
 import icl.rus.spring.model.dto.MessageDTO;
+import icl.rus.spring.model.entity.Message;
 import icl.rus.spring.repository.MessageRepository;
 import icl.rus.spring.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,9 @@ public class MessageServiceImpl implements MessageService {
                 .collect(Collectors.toList());
     }
 
-    public boolean addMessage(MessageDTO message) {
-        repository.save(messageConverter.toEntity(message));
+    public MessageDTO addMessage(MessageDTO message) {
+        Message dbMessage = repository.saveAndFlush(messageConverter.toEntity(message));
 
-        return true;
+        return messageConverter.fromEntity(dbMessage);
     }
 }
