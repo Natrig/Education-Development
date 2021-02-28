@@ -1,6 +1,6 @@
-package icl.rus.spring.model;
+package icl.rus.spring.model.entity;
 
-import icl.rus.spring.model.base.BaseEntity;
+import icl.rus.spring.model.entity.base.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 

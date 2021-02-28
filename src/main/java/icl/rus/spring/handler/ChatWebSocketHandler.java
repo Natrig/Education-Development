@@ -2,31 +2,30 @@ package icl.rus.spring.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import icl.rus.spring.model.dto.MessageDTO;
+import icl.rus.spring.service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler {
-
     private final List<WebSocketSession> webSocketSessions = new ArrayList<>();
+
+    @Autowired
+    private MessageService messageService;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws IOException {
         webSocketSessions.add(session);
 
-        MessageDTO messageDto = new MessageDTO();
-        messageDto.setId(UUID.randomUUID());
-        messageDto.setMessage("test");
-        messageDto.setCreateDate(LocalDateTime.now().toString());
-
-        session.sendMessage(new TextMessage(new ObjectMapper().writeValueAsString(messageDto)));
+        for (MessageDTO message : messageService.getMessages()) {
+            session.sendMessage(new TextMessage(new ObjectMapper().writeValueAsString(message)));
+        }
     }
 
     @Override

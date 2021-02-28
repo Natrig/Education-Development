@@ -1,6 +1,5 @@
-package icl.rus.spring.integration.controller;
+package icl.rus.spring.controller;
 
-import icl.rus.spring.controller.HelloController;
 import icl.rus.spring.controller.base.Sections;
 import org.junit.Test;
 import org.junit.runner.RunWith;

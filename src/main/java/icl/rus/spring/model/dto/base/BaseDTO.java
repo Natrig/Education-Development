@@ -1,7 +1,7 @@
 package icl.rus.spring.model.dto.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import icl.rus.spring.model.base.BaseEntity;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,16 +15,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BaseDTO<T extends BaseEntity> implements Serializable {
+public class BaseDTO implements Serializable {
+
+    @ApiModelProperty("Id")
     private UUID id;
-
-    public BaseDTO(T entity) {
-        if (entity == null) return;
-
-        loadProperties(entity);
-    }
-
-    public void loadProperties(T pEntity) {
-        this.id = pEntity.getId();
-    }
 }

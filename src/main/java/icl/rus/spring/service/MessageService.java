@@ -1,11 +1,11 @@
 package icl.rus.spring.service;
 
-import icl.rus.spring.model.Message;
+import icl.rus.spring.model.dto.MessageDTO;
 
 import java.util.List;
 
 public interface MessageService {
-    public List<Message> getMessages();
+    public List<MessageDTO> getMessages();
 
-    public boolean addMessage(Message message);
+    public boolean addMessage(MessageDTO message);
 }

@@ -1,6 +1,6 @@
 package icl.rus.spring.util;
 
-import icl.rus.spring.model.base.BaseEntity;
+import icl.rus.spring.model.entity.base.BaseEntity;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.UUIDGenerator;

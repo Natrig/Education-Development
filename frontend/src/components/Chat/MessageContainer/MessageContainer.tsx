@@ -8,7 +8,7 @@ type IProps = {
 export default class MessageContainer extends Component<IProps, unknown> {
   public renderMessage = (messages: MessageDTO[]) => {
     return messages.map(msg =>
-      <div key={msg.id}>{msg.id} ({msg.createDate}) : {msg.message}</div>,
+      <div key={msg.id}>{msg.id} () : {msg.message}</div>,
     );
   };
 

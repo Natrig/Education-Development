@@ -1,4 +1,4 @@
-package icl.rus.spring.model.base;
+package icl.rus.spring.model.entity.base;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
