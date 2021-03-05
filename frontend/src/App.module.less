@@ -1,3 +1,5 @@
+@import "./styles/variables";
+
 .app {
   text-align: center;
 }
@@ -5,6 +7,28 @@
 .logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
+}
+
+.nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  background: @main_gradient;
+  height: 60px;
+  margin-bottom: 15px;
+  align-items: center;
+
+  &_item {
+    color: white;
+    font-family: monospace;
+    text-decoration: none;
+    font-size: 20px;
+    text-shadow: 0 0 2px black;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .header {
