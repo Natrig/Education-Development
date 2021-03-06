@@ -1,0 +1,41 @@
+@import "../../../styles/variables";
+
+.container {
+  height: 50px;
+  width: 502px;
+  background: @aviasales_container_color;
+  box-sizing: border-box;
+  border: 1px solid @aviasales_border_color;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.button {
+  width: 100%;
+  font-family: Open Sans, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-right: 1px solid @aviasales_border_color;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.active {
+  color: @aviasales_active_btn_text_color;
+  background: @aviasales_primary_color;
+  border-color: transparent;
+}
