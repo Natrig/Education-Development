@@ -56,6 +56,7 @@ export default class AviasalesService {
         this._tokenInitTimes = 0;
       })
       .catch(error => {
+        this._tokenInitTimes++;
         console.error(`Cannot init token AviasalesService: ${error}`);
 
         if (MAX_TOKEN_INIT_TIMES === this._tokenInitTimes) {
