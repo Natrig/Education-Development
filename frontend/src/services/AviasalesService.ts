@@ -1,14 +1,10 @@
-import { IAxiosService } from "./IAxiosService";
 import axios, { AxiosInstance, AxiosPromise } from "axios";
 import { TicketDTO } from "../models/TicketDTO";
 
 const ADDRESS = 'https://front-test.beta.aviasales.ru/';
 const MAX_TOKEN_INIT_TIMES = 3;
 
-const TIMEOUT_EXCEPTION = 502;
-const SUCCESS = 200;
-
-interface AviasalesTicketResponse {
+export interface AviasalesTicketResponse {
   tickets: TicketDTO[],
   stop: boolean,
 }
@@ -28,52 +24,55 @@ export default class AviasalesService {
     });
   }
 
-  public async getTickets() {
-    // GET TOKEN
+  public loadTickets(): Promise<AviasalesTicketResponse> {
+    return this.getTicketsRequest()
+      .then(response => {
+        this._tokenInitTimes = 0;
 
-    // GET ARRAYS AND RETURN
+        return {
+          stop: response.data.stop,
+          tickets: response.data.tickets,
+        } as AviasalesTicketResponse;
+      }).catch(() => {
+        this._tokenInitTimes++;
 
-    if (!this._searchId) {
-      await this.initTokenApi()
-        .then(response => {
-          this._searchId = (response.data as AviasalesSearchResponse).searchId;
-        })
-        .catch(error => {
-          console.error(`Cannot init token AviasalesService: ${error}`);
-        });
-    }
+        if (MAX_TOKEN_INIT_TIMES === this._tokenInitTimes) {
+          console.error(`AviasalesService. Maximum ticket call times reached: ${MAX_TOKEN_INIT_TIMES}`);
 
-    await this._axios.get('/tickets', {
-      params: {
-        searchId: this.getToken(),
-      }
-    }).then((response) => {
-      if (response.status !== SUCCESS) {
-        this.getTickets();
-      } else {
-        const data = response.data as AviasalesTicketResponse;
-
-        console.log(data);
-
-        if (!data.stop) {
-          this.getTickets();
+          return {
+            stop: true,
+            tickets: [],
+          } as AviasalesTicketResponse;
         }
-      }
-    }).catch(() => {
-      this.getTickets();
-    })
+
+        return this.loadTickets();
+      });
   }
 
-  private initTokenApi(): AxiosPromise {
+  public initToken(): Promise<any> {
+    return this.initTokenRequest()
+      .then(response => {
+        this._searchId = (response.data as AviasalesSearchResponse).searchId;
+        this._tokenInitTimes = 0;
+      })
+      .catch(error => {
+        console.error(`Cannot init token AviasalesService: ${error}`);
+
+        if (MAX_TOKEN_INIT_TIMES === this._tokenInitTimes) {
+          throw new Error(`AviasalesService. Maximum token call times reached: ${MAX_TOKEN_INIT_TIMES}`);
+        }
+      });
+  }
+
+  private initTokenRequest(): AxiosPromise {
     return this._axios.get('/search');
   }
 
-  private isTokenInit() {
-    console.log(this._searchId);
-    return !!this._searchId;
-  }
-
-  private getToken() {
-    return this._searchId;
+  private getTicketsRequest(): Promise<any> {
+    return this._axios.get('/tickets', {
+      params: {
+        searchId: this._searchId,
+      }
+    });
   }
 }

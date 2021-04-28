@@ -1,20 +1,22 @@
 import React from 'react';
 import Ticket from '../Ticket';
-
-import classes from './TicketContainer.module.less';
 import { TicketDTO } from '../../../models/TicketDTO';
 
 interface IProps {
   tickets: TicketDTO[],
 }
 
-const SLIZE_SIZE = 5;
+const getKey = (ticket: TicketDTO) => {
+  return ticket.carrier +
+    ticket.price.toString() +
+    ticket.segments.reduce((acc, curr) => acc + curr.date, '');
+};
 
 const TicketContainer = (props: IProps) => {
   return (
     <div>
-      {props.tickets.slice(0, SLIZE_SIZE).map(ticket =>
-        <Ticket key={ticket.carrier + ticket.price.toString()} ticket={ticket}/>)}
+      {props.tickets.map(ticket =>
+        <Ticket key={getKey(ticket)} ticket={ticket}/>)}
     </div>
   );
 };
